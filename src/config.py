@@ -5,8 +5,14 @@ CRITICAL: Never hardcode credentials in source code
 
 import os
 import json
-import boto3
 from typing import Dict, Optional
+
+# Optional AWS import - only needed for production
+try:
+    import boto3
+    AWS_AVAILABLE = True
+except ImportError:
+    AWS_AVAILABLE = False
 
 class SecureConfig:
     """Secure configuration management for DataNest platform"""
@@ -53,6 +59,10 @@ class SecureConfig:
     
     def _load_from_secrets_manager(self) -> bool:
         """Load from AWS Secrets Manager"""
+        if not AWS_AVAILABLE:
+            print("⚠️  AWS Secrets Manager not available: boto3 not installed")
+            return False
+            
         try:
             secrets_client = boto3.client('secretsmanager')
             response = secrets_client.get_secret_value(

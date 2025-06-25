@@ -1,0 +1,52 @@
+# DatNest Core Platform - Terraform Variables Example
+# Copy this file to terraform.tfvars and customize for your environment
+
+# Basic Configuration
+aws_region   = "us-east-1"
+environment  = "prod"
+project_name = "datnest-core"
+
+# Network Configuration
+vpc_cidr = "10.0.0.0/16"
+
+# Database Configuration
+db_instance_class      = "db.r5.xlarge"    # For 150M+ records
+db_allocated_storage   = 1000              # Initial 1TB
+db_max_allocated_storage = 5000            # Auto-scale to 5TB
+db_name                = "datnest"
+db_username            = "datnest_admin"
+db_password            = "CHANGE_ME_SECURE_PASSWORD"  # Use strong password
+
+# S3 Configuration
+s3_bucket_prefix = "datnest-core"
+
+# Lambda Configuration
+lambda_runtime    = "python3.11"
+lambda_timeout    = 900    # 15 minutes for TSV processing
+lambda_memory_size = 3008   # Maximum memory for performance
+
+# API Gateway Configuration
+api_stage_name = "v1"
+
+# Monitoring Configuration
+enable_cloudwatch_logs = true
+log_retention_days     = 30
+
+# Security Configuration (IMPORTANT: Restrict in production)
+allowed_cidr_blocks = ["0.0.0.0/0"]  # Change to your IP ranges
+
+# Backup Configuration
+backup_retention_period = 7
+backup_window          = "03:00-04:00"
+maintenance_window     = "sun:04:00-sun:05:00"
+
+# Auto Scaling Configuration
+min_capacity = 2
+max_capacity = 64
+
+# Additional Tags
+additional_tags = {
+  Owner       = "DataNest Team"
+  Purpose     = "Property Data Platform"
+  CostCenter  = "Engineering"
+} 

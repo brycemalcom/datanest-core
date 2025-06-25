@@ -1,0 +1,19 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 15432,
+    "database": "datnest",
+    "user": "datnest_admin",
+    "password": "DatNest2024!SecurePass#"
+  },
+  "aws": {
+    "region": "us-east-1",
+    "secrets_manager_id": "datnest-core/db/credentials"
+  },
+  "security_notes": [
+    "This file contains your ACTUAL working credentials",
+    "This file is protected by .gitignore and will NOT be committed to git",
+    "These are the same credentials that were previously hardcoded",
+    "For production, use AWS Secrets Manager or environment variables"
+  ]
+} 
