@@ -1,0 +1,19 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 15432,
+    "database": "datnest", 
+    "user": "your_db_username",
+    "password": "your_secure_password"
+  },
+  "aws": {
+    "region": "us-east-1",
+    "secrets_manager_id": "datnest-core/db/credentials"
+  },
+  "security_notes": [
+    "This is an EXAMPLE configuration file",
+    "Copy to local_config.json and update with real credentials",
+    "local_config.json is in .gitignore and will not be committed",
+    "For production, use AWS Secrets Manager or environment variables"
+  ]
+} 
