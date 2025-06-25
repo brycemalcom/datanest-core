@@ -1,0 +1,152 @@
+# DataNest Core Platform - Security Protection
+# CRITICAL: Never commit sensitive files to version control
+
+# ========================
+# TERRAFORM & INFRASTRUCTURE
+# ========================
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.tfplan
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+*.auto.tfvars
+
+# ========================
+# CREDENTIALS & SECRETS
+# ========================
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+*_private_key*
+*_public_key*
+.env
+.env.local
+.env.production
+secrets.json
+credentials.json
+config.json
+
+# ========================
+# AWS & CLOUD CREDENTIALS
+# ========================
+.aws/
+aws-credentials
+*.credentials
+.boto
+.s3cfg
+
+# ========================
+# DATABASE CREDENTIALS
+# ========================
+*password*
+*secret*
+db_config.py
+database_config.py
+connection_strings.txt
+
+# ========================
+# PYTHON ENVIRONMENT
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ========================
+# VIRTUAL ENVIRONMENTS
+# ========================
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ========================
+# LOGS & TEMPORARY FILES
+# ========================
+*.log
+*.tmp
+*.temp
+temp/
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# ========================
+# DEVELOPMENT & TESTING
+# ========================
+.pytest_cache/
+.coverage
+.nyc_output
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ========================
+# EDITORS & IDEs
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ========================
+# BACKUP & ARCHIVE FILES
+# ========================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.zip
+*.tar.gz
+*.rar
+
+# ========================
+# SPECIFIC PROJECT FILES TO PROTECT
+# ========================
+# Temporary files from cleanup
+temp/
+
+# Any file with 'password' in the name
+*password*
+*secret*
+*credential*
+
+# SSH and encryption keys
+ssh_keys/
+keys/
+certs/ 
