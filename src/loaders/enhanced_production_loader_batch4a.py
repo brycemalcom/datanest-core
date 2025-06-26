@@ -119,6 +119,38 @@ def enhanced_production_load():
         'Number_of_Bedrooms': 'number_of_bedrooms',
         'Number_of_Baths': 'number_of_bathrooms',
         'Year_Built': 'year_built',
+        'Effective_Year_Built': 'effective_year_built',
+        'Building_Area_Gross': 'building_area_gross',
+        'Building_Area_Living': 'building_area_living',
+        'Calculated_Total_Area': 'building_area_total_calculated',
+        'Number_of_Stories': 'number_of_stories',
+        'Total_Rooms': 'total_number_of_rooms',
+        'Number_of_Units': 'number_of_units',
+        'Number_of_Partial_Baths': 'number_of_partial_baths',
+        'Type_of_Construction': 'type_construction',
+        'Style': 'building_style',
+        'Exterior_Walls': 'exterior_walls',
+        'Foundation': 'foundation',
+        'Roof_Cover': 'roof_cover',
+        'Roof_Type': 'roof_type',
+        'Interior_Wall': 'interior_walls',
+        'Floor_Cover': 'floor_cover',
+        'Heating': 'heating',
+        'Heating_Fuel_Type': 'heating_fuel_type',
+        'Air_Conditioning': 'air_conditioning',
+        'Water': 'water',
+        'Sewer': 'sewer',
+        'Garage_Type': 'garage_type',
+        'Garage_Cars': 'garage_cars',
+        'Pool': 'pool',
+        'Fireplace': 'fireplace',
+        'Basement': 'basement',
+        'Amenities': 'amenities',
+        'Amenities_2': 'amenities_2',
+        'Elevator': 'elevator',
+        'Building_Quality': 'building_quality_code',
+        'Building_Condition': 'building_condition_code',
+        'Quality_and_Condition_Source': 'quality_and_condition_source',
         
         # Assessment
         'Total_Assessed_Value': 'total_assessed_value',
@@ -197,7 +229,9 @@ def enhanced_production_load():
             
             # Integer fields
             integer_fields = ['number_of_bedrooms', 'number_of_bathrooms', 'year_built', 
-                            'confidence_score', 'length_of_residence_months']
+                            'confidence_score', 'length_of_residence_months',
+                            'effective_year_built', 'total_number_of_rooms',
+                            'number_of_units', 'number_of_partial_baths', 'garage_cars']
             for field in integer_fields:
                 if field in clean_data.columns:
                     # Enhanced integer handling
@@ -209,6 +243,12 @@ def enhanced_production_load():
             # String fields
             string_fields = [col for col in clean_data.columns 
                            if col not in numeric_fields + integer_fields + required_fields]
+            string_fields.extend(['type_construction', 'building_style', 'exterior_walls', 
+                                'foundation', 'roof_cover', 'roof_type', 'interior_walls', 
+                                'floor_cover', 'heating', 'heating_fuel_type', 'air_conditioning', 
+                                'water', 'sewer', 'garage_type', 'pool', 'fireplace', 'basement', 
+                                'amenities', 'amenities_2', 'elevator', 'building_quality_code', 
+                                'building_condition_code', 'quality_and_condition_source'])
             for field in string_fields:
                 if field in clean_data.columns:
                     clean_data[field] = clean_data[field].fillna('')
