@@ -1,0 +1,348 @@
+0010: Miscellaneous (General)
+0011: Pipeline or Right-of-Way
+0012: Rail (Right-of-way & track)
+0013: Road (Right-of-way)
+0014: Utilities (Right-of-way ONLY)
+0015: Sub-Surface Rights (mineral)
+0016: Surface Rights (Grazing, timber, coal, etc.)
+0017: Leasehold Rights (misc.)
+0018: Possessory Interest (misc.)
+0019: Petroleum & Gas Wells (misc.)
+0020: Water Rights (misc.)
+0021: Right-of-Way (not rail, road or utility)
+0022: Easement (misc.)
+0023: Homestead (Misc.)
+0024: Common Area (misc.)
+0025: Royalty Interest
+0026: Working Interest
+0027: Parcels with improvements, Use Not Specified
+0500: Personal property (general)
+0510: Vehicles (general)
+0511: Motor vehicles (cars, trucks, etc.)
+0512: Recreational Vehicles / Travel Trailers
+0513: Watercraft (ships, boats, PWCs, etc.)
+0514: Aircraft
+0515: Rolling stock (railroad)
+0516: Spacecraft
+0519: Misc vehicles not otherwise classed (antiques, etc.)
+0520: Business personal property (general)
+0521: Equipment / supplies
+0522: Inventory
+0523: Goods in transit
+0524: Livestock (animals, fish, birds, etc.)
+0525: Crops (in ground)
+0526: Crops (harvested)
+0529: Misc. Business Personal Property not otherwise classed
+0530: Structures (general)
+0532: Structures on Leased Land
+0533: Temporary structures
+0539: Misc structures not otherwise classed (billboards, etc.)
+0540: Intangible personal property
+0599: Misc personal property not otherwise classed
+1000: Residential (General) (Single)
+1001: Single Family Residential
+1002: Townhouse (Residential)
+1003: Cluster home (Residential)
+1004: Condominium Unit (Residential)
+1005: Cooperative Unit (Residential)
+1006: Mobile/Manufactured Home (regardless of Land ownership)
+1007: Row House (Residential)
+1008: Rural/Agricultural Residence
+1009: Planned Unit Development (PUD) (Residential)
+1010: Residential Common Area (Condo/PUD/etc.)
+1011: Timeshare (Residential)
+1012: Seasonal, Cabin, Vacation Residence
+1013: Bungalow (Residential)
+1014: Zero Lot Line (Residential)
+1015: Misc Residential Improvement
+1016: Modular/Pre-Fabricated Homes
+1017: Patio Home
+1018: Garden Home
+1019: Landominium
+1020: Barndominium
+1021: Tiny House
+1022: Single Family Residential w/ADU
+1023: Accessory Dwelling Unit (ADU)
+1024: Single Family Residential - Two or more SFR on one parcel
+1025: Horizontal Property Regime
+1100: Residential Income (General) (Multi-Family)
+1101: Duplex (2 units, any combination)
+1102: Triplex (3 units, any combination)
+1103: Quadruplex (4 units, any combination)
+1104: Apartment House (5+ units)
+1105: Apartment House (100+ units)
+1106: Garden Apt, Court Apt (5+ units)
+1107: Highrise Apartments
+1108: Boarding House, Rooming House, Apt Hotel, Transient Lodgings, Hostel
+1109: Mobile Home Park, Trailer Park
+1110: Multi-Family Dwellings (Generic, any combination 2+)
+1111: Fraternity House, Sorority House
+1112: Apartments (generic)
+1113: Dormitory, Group Quarters (Residential)
+1114: Residential Condominium Development (Association Assessment)
+1124: Condominium Building (Residential)
+1125: Cooperative Building (Residential)
+1126: Apartment House (fewer than 5 units)
+1901: Residential Parking Garage
+1902: Residential Storage Space
+1999: Single Family Residential (Assumed)
+2000: Commercial (General)
+2001: Retail Stores ( Personal Services, Photography, Travel)
+2002: Store (multi-story)
+2003: Store/Office (mixed use)
+2004: Department Store (apparel, household goods, furniture)
+2005: Department Store (multi-story)
+2006: Grocery, Supermarket
+2007: Regional: Shopping Center, Mall (w/Anchor)
+2008: Community: Shopping Plaza, Shopping Center, Mini-Mall
+2009: Neighborhood: Shopping Center, Strip Center, Enterprise Zone
+2010: Shopping Center COMMON AREA (parking, etc.)
+2011: Veterinary, Animal Hospital
+2012: Restaurant
+2013: Fast Food Restaurant / Drive-thru
+2014: Take-out Restaurant (food preparation)
+2015: Bakery
+2016: Bar, Tavern
+2017: Liquor Store
+2018: Convenience store (7-11)
+2019: Convenience Store (w/fuel pump)
+2020: Service station (full service)
+2021: Service station w/convenience store (food mart)
+2022: Truck stop (fuel and diner)
+2023: Vehicle Rentals, Vehicle Sales (auto/truck/RV/boat/etc.)
+2024: Auto repair (& related), Garage
+2025: Car wash
+2026: Dry Cleaner, Laundry Service
+2027: Service Shop (TV, radio, electric, plumbing)
+2028: Florist, Nursery, Greenhouse (retail/wholesale)
+2029: Wholesale Outlet, Discount Store
+2030: Printer/Delivery - Retail (Kinkos, UPS, FedEx, etc.)
+2031: Mini-Warehouse, Self-Storage
+2032: Day care, Pre-school (Commercial)
+2033: Motel
+2034: Hotel
+2035: Parking Garage, Parking Structure
+2036: Parking Lot
+2037: Funeral Home, Mortuary (Commercial)
+2038: Casino
+2039: Hotel-Resort
+2040: Hotel/Motel
+2041: Gas Station
+2042: Retail/Residential (mixed use)
+2043: Commercial Building, Mail Order, Show Room (non-auto), Commercial Whse
+2044: Commercial/Office/Residential (mixed use)
+2045: Appliance Store (Best Buy, HH Gregg)
+2046: Kennel
+2047: Laundromat (self-service)
+2048: Nightclub (Cocktail Lounge)
+2050: Farm Supply & Equipment (retail)
+2051: Home Improvement, Garden Center (Home Depot, Lowe's)
+2052: Commercial Condominium (not offices)
+2053: Drug Store / Pharmacy (CVS, Walgreens)
+2054: Bed & Breakfast
+2055: Barber/Hair Salon
+2056: Pet Boarding & Grooming
+2057: Roadside Market
+2058: Car Wash - Automated
+2059: Car Wash - Self-Serve
+2060: Cannabis Dispensary
+3000: Commercial Office (General)
+3001: Professional Bldg (legal; insurance; real estate; business)
+3002: Professional Bldg (multi-story)
+3003: Office Bldg (General)
+3004: Office Bldg (multi-story)
+3005: Dental Bldg
+3006: Medical Bldg/Clinic
+3007: Financial Bldg (Bank, S&L; Mtge; Loan; Credit)
+3008: Condominium Offices
+3009: Skyscraper/Highrise (Commercial Offices)
+3010: Commercial/Industrial (mixed use)
+3011: Common Area (commercial, not shopping center or Association Asmnt.)
+3012: Mobile Commercial Units
+4000: Recreational/Entertainment (General)
+4001: Recreation Center
+4002: Public Swimming Pool
+4003: Boat Slips, Marina, Yacht Club (recreation/pleasure), Boat Landing
+4004: Bowling Alley
+4005: Arcades (Amusement)
+4006: Skating rink, Ice Skating, Roller Skating
+4007: Clubs, Lodges, Professional Associations
+4008: Museums, Library, Art Gallery (Recreational)
+4009: Country Club
+4010: Stadiums
+4011: Arenas, Convention Center
+4012: Auditoriums
+4013: Driving Range (Golf)
+4014: Race track (auto; dog; horse)
+4015: Gym, Health Spa
+4016: Dance Hall
+4017: Riding Stable, Trails
+4018: Campground, RV Park
+4019: Fairgrounds
+4020: Theater
+4021: Drive-In Theater
+4022: Amusement Park, Tourist Attraction
+4023: Piers, Wharf (Recreation)
+4024: Fish Camps, Game Club, Target Shooting
+4025: Outdoor Recreation: Beach, Mountain, Desert
+4026: Pool Hall, Billiard Parlor
+4027: Park, Playground, Picnic Area
+4028: Golf Course
+4029: Racquet Court, Tennis Court
+4030: Zoo
+4031: Go-carts, Miniature Golf, Water slides
+4032: Sports Complex
+5000: Industrial (General)
+5001: Manufacturing (light)
+5002: Light Industrial (10% improved office space; Machine Shop)
+5003: Warehouse (Industrial)
+5004: Storage yard, Open Storage (light equipment, material)
+5005: Food Packing, Packing Plant (fruit; vegetable; meat, dairy)
+5006: Assembly (light industrial)
+5007: Food Processing (candy; bakery; potato chips)
+5008: Recycling (metal; paper; glass; etc.)
+5009: Communications (see 6500 series)
+5010: Condominiums (Industrial)
+5011: R&D Facility, Laboratory, Research Facility, Cosmetics, Pharmaceutical
+5012: Industrial Park
+5013: Multi-Tenant Industrial Bldg.
+5014: Marine Facility/Boat Repairs (small craft or sailboat)
+5015: Lumber & Wood Product Manufacturing (including furniture)
+5016: Paper Product Manufacturing & related products
+5017: Printing & Publishing (Light Industrial)
+5018: Industrial Loft Building, Loft Building
+5019: Construction/Contracting Services (Industrial)
+5020: Common Area (Industrial)
+6000: Heavy Industrial (General)
+6001: Transportation
+6002: Distribution Warehouse (Regional)
+6003: Mining facility (oil; gas; mineral, precious metals)
+6004: Storage yard (junk; auto wrecking, salvage)
+6005: Distillery, Brewery, Bottling
+6006: Refinery, Petroleum Products
+6007: Mill (feed; grain; paper; lumber; textile; pulp)
+6008: Factory (apparel, textile products, leather, medium mfg.)
+6009: Processing Plant (minerals; cement; rock; gravel; glass; clay)
+6010: Lumberyard, Building Materials
+6011: Shipyard/Storage - Built or Repaired (seagoing vessels)
+6012: Slaughter House, Stockyard
+6013: Waste Disposal, Sewage (processing; disposal; storage; treatment)
+6014: Quarries (sand; gravel; rock)
+6015: Heavy Manufacturing
+6016: Labor Camps (Industrial)
+6017: Winery
+6018: Chemical
+6019: Foundry, Industrial Plant (metal; rubber; plastic)
+6020: Cannery
+6021: Bulk Storage, Tanks (gasoline, fuel, etc.)
+6022: Grain Elevator
+6023: Dump Site
+6024: Cold Storage
+6025: Sugar Refinery
+6500: Transportation & Communications (General)
+6501: Airport & related
+6502: Railroad & related
+6503: Freeways, State Hwys
+6504: Roads, Streets, Bridges
+6505: Bus Terminal
+6506: Telegraph, Telephone
+6507: Radio or TV Station
+6508: Truck Terminal (Motor Freight)
+6509: Cable TV Station
+6510: Harbor & Marine Transportation
+6511: Microwave
+6512: Commercial Auto Transportation/Storage
+6513: Pollution Control
+6514: Cellular
+7000: Agricultural / Rural (General)
+7001: Farm (Irrigated or Dry)
+7002: Ranch
+7003: Range land (grazing)
+7004: Crop land, Field Crops, Row Crops (all soil classes)
+7005: Orchard (fruit; nut)
+7006: Vineyard (Agricultural)
+7007: Poultry Farm (chicken; turkey; fish; bees; rabbits)
+7008: Dairy Farm
+7009: Timberland, Forest, Trees (Agricultural)
+7010: Wildlife (Refuge)
+7011: Desert or Barren Land
+7012: Pasture, Meadow
+7013: Misc. Structures - Ranch, Farm, Fixtures
+7014: Grove (Agricultural)
+7015: Feedlots
+7016: Livestock parcel
+7017: Horticulture, Growing Houses, Ornamental (Agricultural)
+7018: Well Site (Agricultural)
+7019: Truck Crops (tobacco; cash crops)
+7020: Reservoir, Water Supply
+7021: Irrigation, Flood Control
+7022: Natural Resources
+7023: Rural Improved / Non-Residential
+7024: Cannabis Grow Facility
+8000: Vacant Land (General)
+8001: Residential-Vacant Land
+8002: Commercial-Vacant Land
+8003: Industrial-Vacant Land
+8004: Private Preserve, Open Space-Vacant Land (Forest Land, Conservation)
+8005: Institutional-Vacant Land
+8006: Government-Vacant Land
+8007: Multi-Family-Vacant Land
+8008: Rural/Agricultural-Vacant Land
+8009: Waste Land, Marsh, Swamp, Submerged-Vacant Land
+8010: Recreational-Vacant Land
+8011: Water Area (Lakes; River; Shore)-Vacant Land
+8012: Unusable Land (Remnant, Steep, etc.)
+8013: Abandoned Site, Contaminated Site
+8014: Under Construction
+8015: Vacant Land - Destroyed/Uninhabitable Improvement
+8016: Vacant Land - Unspecified Improvement
+8017: Vacant Land - Exempt
+8500: Special Purpose
+8501: State Board of Equalization - Special Assessments
+8502: Regulating Districts & Assessments; Tax Abatement
+8503: Redevelopment Agency or Zone
+8504: Centrally Assessed
+9000: Exempt (full or partial)
+9001: Native American Lands / American Indian Lands
+9100: Institutional (General)
+9101: Religious, Church, Worship (Synagogue, Temple, Parsonage)
+9102: Parochial School, Private School
+9103: College, University, Vocational school-PRIVATE
+9104: Hospital-PRIVATE
+9105: Medical Clinic
+9106: Homes (retired; handicap, rest; convalescent; nursing)
+9107: Children's Home, Orphanage
+9108: Cemetery (Exempt)
+9109: Crematorium, Mortuary (Exempt)
+9110: Charitable organization, Fraternal
+9111: Recreational Non-Taxable (Camps, Boy/Girl Scouts)
+9112: Private Utility (electric, water, gas, nuclear, solar, wind, etc.)
+9200: Governmental/Public Use (General)
+9201: Military (office; base; post; port; reserve; weapon range; test sites)
+9202: Forest (park; reserve; recreation, conservation)
+9203: Public School (administration; campus; dorms; instruction)
+9204: Colleges, University-PUBLIC
+9205: Post Office
+9206: Cultural, Historical (monuments; homes; museums; other)
+9207: Govt. Administrative Office (Federal; State; Local; Court House)
+9208: Emergency (Police; Fire; Rescue; Shelters, Animal Shelter)
+9209: Other exempt property
+9210: City, Municipal, Town, Village Owned (Exempt)
+9211: County Owned (Exempt)
+9212: State Owned (Exempt)
+9213: Federal Property (Exempt)
+9214: Public Health Care Facility (Exempt)
+9215: Community Center (Exempt)
+9216: Public Utility (electric, water, gas, nuclear, solar, wind, etc.)
+9217: Welfare, Social Service, Low Income Housing (Exempt)
+9218: Correctional Facility, Jails, Prisons, Insane Asylum
+9219: Hospital-PUBLIC
+9300: Historical-PRIVATE (General)
+9301: Historical Residence
+9302: Historical Retail
+9303: Historical Warehouse
+9304: Historical Office
+9305: Historical Transient Lodging (hotel/motel)
+9307: Historical Recreation, Entertainment
+9308: Historical Park / Site
+9309: Historical District
