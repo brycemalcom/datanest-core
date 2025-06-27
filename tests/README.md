@@ -52,13 +52,20 @@ python tests/quick_test_loader.py
 ## 📊 Critical Test Priorities
 
 1. **Database Connection** - Ensure infrastructure connectivity
-2. **File Processing** - Validate TSV parsing with 449 columns
-3. **Performance** - Test with 160M record scale
+2. **Field Processing** - Validate TSV parsing with 449 columns
+3. **Performance** - Test with 150M+ record scale
 4. **Data Integrity** - Validate complete data capture
 
 ## 🔧 Test Environment Setup
 
-1. Ensure database connection is configured
+1. Ensure database connection is configured (see [SECURITY_SETUP.md](../SECURITY_SETUP.md))
 2. Verify test data files are available
 3. Install required dependencies from `requirements.txt`
-4. Run tests in order: connection → file processing → performance 
+4. Run tests in order: connection → file processing → performance
+
+## 🔗 **Documentation References**
+
+> **Note**: For current project status and development progress, see our living documentation:
+> - **[CURRENT_PROJECT_STATUS.md](../CURRENT_PROJECT_STATUS.md)** - Current development status
+> - **[DATANEST_PROGRESS_LOG.md](../DATANEST_PROGRESS_LOG.md)** - Complete development history
+> - **[ENGINEERING_HANDOFF.md](../ENGINEERING_HANDOFF.md)** - Session-to-session handoffs 

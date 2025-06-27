@@ -6,8 +6,9 @@ This directory contains the core application source code for the DataNest platfo
 
 ### `/loaders`
 **Production data loading modules**
-- `production_copy_loader.py` - Primary working loader using COPY command (ACTIVE)
-- `bulletproof_loader.py` - Simplified, error-resistant loader (BACKUP)
+- `enhanced_production_loader_batch4a.py` - Current production loader (ACTIVE)
+- `bulletproof_production_loader.py` - Enhanced production loader (ACTIVE)
+- `production_copy_loader.py` - Legacy loader (REFERENCE)
 
 ### `/analyzers` 
 **Data analysis and field mapping tools**
@@ -25,19 +26,29 @@ This directory contains the core application source code for the DataNest platfo
 
 ## 🚀 Getting Started
 
-1. **Data Loading**: Use `loaders/production_copy_loader.py` for production data loading
+1. **Data Loading**: Use `loaders/enhanced_production_loader_batch4a.py` for production data loading
 2. **Analysis**: Run analyzers to understand data structure and quality
 3. **Utilities**: Use utils for system monitoring and validation
 
 ## 📊 Current Status
 
-- **Active Loaders**: 2 production-ready loaders
+> **Note**: For current project status and field mapping progress, see **[CURRENT_PROJECT_STATUS.md](../CURRENT_PROJECT_STATUS.md)**
+
+- **Active Loaders**: Enhanced production loaders operational
 - **Analysis Tools**: 4 comprehensive analyzers  
 - **Utilities**: 4 essential utility functions
-- **Data Loss Issue**: 97% data loss identified (436/449 columns not captured)
+- **Database Schema**: 209 columns with systematic migration approach
+- **Field Mapping**: Systematic completion in progress (see current status document)
 
-## 🎯 Next Steps
+## 🎯 Development Approach
 
-1. Implement hybrid architecture (SQL + JSONB) for complete data capture
-2. Consolidate mapping logic from analyzers into production loader
-3. Expand schema to capture all 449 TSV columns 
+1. **Evidence-Based Mapping**: All field mappings verified against data_dictionary.txt
+2. **Systematic Enhancement**: Category-by-category completion approach
+3. **Production Quality**: Comprehensive validation and testing framework
+4. **Zero Data Loss Goal**: Complete capture of all 449 TSV fields
+
+## 🔗 **Documentation References**
+
+- **[CURRENT_PROJECT_STATUS.md](../CURRENT_PROJECT_STATUS.md)** - Real-time project status
+- **[DATANEST_PROGRESS_LOG.md](../DATANEST_PROGRESS_LOG.md)** - Development history
+- **[ENGINEERING_HANDOFF.md](../ENGINEERING_HANDOFF.md)** - Session handoffs 
