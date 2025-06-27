@@ -34,7 +34,7 @@ def extract_headers_for_category(target_category):
                     headers_found.append(header)
         
         if headers_found:
-            print(f"\\n--- Found {len(headers_found)} TSV Headers for '{target_category}' ---")
+            print(f"\n--- Found {len(headers_found)} TSV Headers for '{target_category}' ---")
             for header in sorted(headers_found):
                 print(header)
             print("----------------------------------------------------")
@@ -55,5 +55,5 @@ if __name__ == "__main__":
         target_category_name = sys.argv[1]
         extract_headers_for_category(target_category_name)
     else:
-        print("Usage: python scripts/get_category_fields.py \\"<Category Name>\\"")
-        print("Example: python scripts/get_category_fields.py \\"Building Characteristics\\"") 
+        print("Usage: python scripts/get_category_fields.py \"<Category Name>\"")
+        print("Example: python scripts/get_category_fields.py \"Building Characteristics\"") 
