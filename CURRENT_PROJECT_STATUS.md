@@ -208,6 +208,30 @@ File 2: Arizona continuation + next states (5.73 GB confirmed)
 
 **Status**: Issue identified but not resolved. Requires further work on DataFrame processing logic.
 
----
+## 🚨 CRITICAL ISSUES REQUIRING IMMEDIATE ATTENTION
+
+### **URGENT: Loader Investigation Required (June 27, 2025)**
+**Status**: CRITICAL - Multiple loaders with unclear success rates
+
+**Problem**: Loader confusion causing failed runs and wasted time
+- ✅ **Previous success**: 4.9M records loaded (98.5% success rate)
+- ❌ **Recent failure**: 175k records only (bulletproof_complete_loader.py)
+- ❓ **Unknown**: Which loader achieved the 4.9M success?
+
+**Available Loaders**:
+```
+scripts/turbo_alabama_loader.py              ← Likely the 4.9M champion
+scripts/bulletproof_complete_loader.py       ← BUGGY (column misalignment)
+scripts/bulletproof_complete_loader_fixed.py ← Untested fix
+src/loaders/bulletproof_production_loader.py
+src/loaders/enhanced_production_loader_batch4a.py
+src/loaders/production_copy_loader.py
+```
+
+**Next Actions**:
+1. **Identify** which loader achieved 4.9M records
+2. **Test** the successful loader to reproduce results
+3. **Document** clear loader recommendations
+4. **Archive** or fix the buggy loaders
 
 ## 📊 CURRENT ACHIEVEMENTS 
