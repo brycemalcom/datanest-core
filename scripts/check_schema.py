@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check database schema for column issues"""
+"""Check database schema and tables"""
 
 import sys
 import os
@@ -12,39 +12,30 @@ try:
     conn = psycopg2.connect(**get_db_config())
     cursor = conn.cursor()
     
-    # Check for coordinate columns
-    cursor.execute("""
-        SELECT column_name 
-        FROM information_schema.columns 
-        WHERE table_name='properties' 
-        AND table_schema='datnest' 
-        AND (column_name LIKE '%longitude%' OR column_name LIKE '%latitude%')
-        ORDER BY column_name
-    """)
-    coord_cols = [row[0] for row in cursor.fetchall()]
-    print(f"🌍 Coordinate columns: {coord_cols}")
+    print("📊 Checking database schema...")
     
-    # Check if basic columns exist
-    test_columns = ['quantarium_internal_pid', 'apn', 'fips_code', 'estimated_value', 
-                   'property_city_name', 'current_owner_name', 'lot_size_square_feet']
+    # Check schemas
+    cursor.execute("SELECT schema_name FROM information_schema.schemata")
+    schemas = cursor.fetchall()
+    print(f"🗂️  Available schemas: {[s[0] for s in schemas]}")
     
-    cursor.execute("""
-        SELECT column_name 
-        FROM information_schema.columns 
-        WHERE table_name='properties' 
-        AND table_schema='datnest' 
-        AND column_name = ANY(%s)
-    """, (test_columns,))
+    # Check tables in datnest schema
+    cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'datnest'")
+    tables = cursor.fetchall()
+    print(f"📋 Tables in datnest schema: {[t[0] for t in tables]}")
     
-    existing_cols = [row[0] for row in cursor.fetchall()]
-    print(f"✅ Existing basic columns: {existing_cols}")
-    
-    missing_cols = set(test_columns) - set(existing_cols)
-    if missing_cols:
-        print(f"❌ Missing columns: {missing_cols}")
+    # If properties table exists, check its structure
+    if any(t[0] == 'properties' for t in tables):
+        cursor.execute("SELECT column_name FROM information_schema.columns WHERE table_schema = 'datnest' AND table_name = 'properties'")
+        columns = cursor.fetchall()
+        print(f"🔧 Properties table columns: {len([c[0] for c in columns])} columns")
+        print("✅ Properties table exists!")
+    else:
+        print("❌ Properties table NOT found")
+        print("💡 Need to create database schema")
     
     cursor.close()
     conn.close()
     
 except Exception as e:
-    print(f"❌ Error: {e}") 
+    print(f"❌ Error: {e}")
