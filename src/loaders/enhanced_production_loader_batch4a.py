@@ -746,14 +746,93 @@ def enhanced_production_load(custom_file_path=None, test_mode=True, max_chunks=2
                 if field in clean_data.columns:
                     clean_data[field] = clean_data[field].fillna('UNKNOWN')
             
+            # Special handling for building area fields that can contain codes (like "B" for basement)
+            building_area_fields = ['building_area', 'building_area_2', 'building_area_3', 'building_area_4', 
+                                   'building_area_5', 'building_area_6', 'building_area_7', 'extra_features_1_area', 
+                                   'extra_features_2_area', 'extra_features_3_area', 'extra_features_4_area', 
+                                   'other_impr_building_area_1', 'other_impr_building_area_2', 'other_impr_building_area_3',
+                                   'other_impr_building_area_4', 'other_impr_building_area_5', 'other_impr_building_area_6', 
+                                   'other_impr_building_area_7']
+            
+            def clean_building_area_value(x, field_name, clean_data, row_idx):
+                """Clean building area values and preserve ALL building codes in indicator fields"""
+                if pd.isna(x) or x is None:
+                    return None
+                x_str = str(x).strip().upper()
+                
+                # Handle empty/null values
+                if x_str in ['', 'NAN', 'NULL', 'N/A', 'NA']:
+                    return None
+                
+                # Define valid building feature codes (from data dictionary)
+                valid_building_codes = {
+                    # Single letter codes
+                    'B': 'Basement',
+                    'G': 'Garage', 
+                    'P': 'Porch',
+                    'A': 'Attic',
+                    'D': 'Deck',
+                    'C': 'Carport',
+                    'S': 'Storage',
+                    'L': 'Loft',
+                    'R': 'Recreation Room',
+                    'W': 'Workshop',
+                    # Two letter codes with Finished/Unfinished
+                    'BF': 'Finished Basement',
+                    'BU': 'Unfinished Basement',
+                    'GF': 'Finished Garage',
+                    'GU': 'Unfinished Garage', 
+                    'PF': 'Finished Porch',
+                    'PU': 'Unfinished Porch',
+                    'AF': 'Finished Attic',
+                    'AU': 'Unfinished Attic',
+                    'DF': 'Finished Deck',
+                    'DU': 'Unfinished Deck'
+                }
+                
+                # Check if this is a building feature code
+                if x_str in valid_building_codes or (len(x_str) <= 2 and x_str.isalpha()):
+                    # Map to appropriate indicator field based on building area field
+                    indicator_field = None
+                    if field_name == 'building_area':
+                        indicator_field = 'building_area_1_indicator'
+                    elif field_name == 'building_area_2':
+                        indicator_field = 'building_area_2_indicator'
+                    elif field_name == 'building_area_3':
+                        indicator_field = 'building_area_3_indicator'
+                    elif field_name == 'building_area_4':
+                        indicator_field = 'building_area_4_indicator'
+                    elif field_name == 'building_area_5':
+                        indicator_field = 'building_area_5_indicator'
+                    elif field_name == 'building_area_6':
+                        indicator_field = 'building_area_6_indicator'
+                    elif field_name == 'building_area_7':
+                        indicator_field = 'building_area_7_indicator'
+                    
+                    # Preserve code in indicator field
+                    if indicator_field and indicator_field in clean_data.columns:
+                        clean_data.at[row_idx, indicator_field] = x_str
+                    
+                    return None  # Area value is NULL, indicator preserves the code
+                
+                # Try to convert numeric values
+                try:
+                    return float(x_str)
+                except ValueError:
+                    # If it's not a recognized code and not numeric, treat as NULL
+                    return None
+            
+            for field in building_area_fields:
+                if field in clean_data.columns:
+                    # Apply with additional parameters for proper code handling
+                    for idx in clean_data.index:
+                        clean_data.at[idx, field] = clean_building_area_value(
+                            clean_data.at[idx, field], field, clean_data, idx
+                        )
+            
             # Numeric fields - Enhanced handling of empty strings  
             numeric_fields = ['building_area_total', 'lot_size_square_feet', 'lot_size_acres', 
-                            'latitude', 'longitude', 'mtg01_interest_rate', 'building_area',
-                            'building_area_2', 'building_area_3', 'building_area_4', 'building_area_5',
-                            'building_area_6', 'building_area_7', 'extra_features_1_area', 'extra_features_2_area',
-                            'extra_features_3_area', 'extra_features_4_area', 'other_impr_building_area_1',
-                            'other_impr_building_area_2', 'other_impr_building_area_3', 'other_impr_building_area_4',
-                            'other_impr_building_area_5', 'other_impr_building_area_6', 'other_impr_building_area_7',
+                            'latitude', 'longitude', 'mtg01_interest_rate',
                             'mtg01_curr_est_int_rate', 'mtg01_interest_rate_not_greater_than', 'mtg01_interest_rate_not_less_than',
                             'mtg01_maximum_interest_rate', 'mtg02_interest_rate', 'mtg02_curr_est_int_rate',
                             'mtg02_interest_rate_not_greater_than', 'mtg02_interest_rate_not_less_than', 'mtg02_maximum_interest_rate',
@@ -827,6 +906,7 @@ def enhanced_production_load(custom_file_path=None, test_mode=True, max_chunks=2
                           'last_transfer_date', 'last_sale_date', 'prior_transfer_date', 'prior_sale_date',
                           'foreclosure_auction_date', 'foreclosure_recording_date', 'foreclosure_filing_date',
                           'certification_date', 'record_creation_date', 'trans_asof_date',
+                          'ownership_start_date',  # ADDED: Missing ownership date field
                           'mtg01_original_date_of_contract', 'mtg01_recording_date', 'mtg01_due_date',
                           'mtg01_assignment_date', 'mtg01_pre_fcl_recording_date', 'mtg01_pre_fcl_filing_date',
                           'mtg01_pre_fcl_auction_date', 'mtg02_original_date_of_contract', 'mtg02_recording_date',
@@ -843,9 +923,19 @@ def enhanced_production_load(custom_file_path=None, test_mode=True, max_chunks=2
                           'mtg04_prefcl_recording_date', 'mtg04_recording_date']
             for field in date_fields:
                 if field in clean_data.columns:
-                    # Replace empty strings with None for proper NULL handling
-                    clean_data[field] = clean_data[field].replace('', pd.NA)
-                    clean_data[field] = clean_data[field].where(pd.notna(clean_data[field]), None)
+                    # Enhanced date cleaning: handle "0", empty strings, and invalid dates
+                    def clean_date_value(x):
+                        if pd.isna(x) or x is None:
+                            return None
+                        x_str = str(x).strip()
+                        if x_str in ['', '0', 'nan', 'NaN', 'null']:
+                            return None
+                        # If it's not 8 digits, it's invalid for YYYYMMDD format
+                        if not x_str.isdigit() or len(x_str) != 8:
+                            return None
+                        return x_str
+                    
+                    clean_data[field] = clean_data[field].apply(clean_date_value)
             
             # FIXED: Preserve other_rooms as VARCHAR field (NO Y/N to NULL conversion)
             # other_rooms is VARCHAR(5) in data dictionary - preserve Y/N values

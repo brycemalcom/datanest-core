@@ -53,17 +53,19 @@ def process_chunk_bulletproof_v2(chunk_data, field_mapping, chunk_num):
                     # Numeric fields
                     clean_data[tsv_col] = pd.to_numeric(clean_data[tsv_col].replace('', pd.NA), errors='coerce')
                     
-                elif db_col in ['year_built', 'number_of_bedrooms', 'estimated_value', 'lsale_price']:
+                elif db_col in ['year_built', 'number_of_bedrooms', 'estimated_value', 'lsale_price', 'assessment_year']:
                     # Integer fields - handle floats like "1975.0" and large decimals like "30.632601"
-                    # First convert to numeric, replacing empty strings with NaN
-                    clean_data[tsv_col] = pd.to_numeric(clean_data[tsv_col].replace(['', ' ', 'nan', 'NaN'], pd.NA), errors='coerce')
+                    # CRITICAL: Replace empty strings with None for proper NULL handling
+                    clean_data[tsv_col] = clean_data[tsv_col].replace(['', ' ', 'nan', 'NaN', 'NULL'], None)
                     
-                    # Convert float to int, handling NaN and large decimals properly
+                    # Convert to numeric, handling NaN and large decimals properly
                     def safe_int_convert(x):
-                        if pd.isna(x) or x is None or str(x).lower() == 'nan':
-                            return None  # Explicitly return None for NaN values
+                        if pd.isna(x) or x is None or str(x).lower() in ['nan', '', 'null', 'none']:
+                            return None  # Return None for NULL database insertion
                         try:
                             # For very large decimals, round to nearest integer
+                            if str(x).strip() == '':  # Extra empty string check
+                                return None
                             float_val = float(x)
                             if pd.isna(float_val):  # Double-check for NaN after float conversion
                                 return None
@@ -72,8 +74,6 @@ def process_chunk_bulletproof_v2(chunk_data, field_mapping, chunk_num):
                             return None
                     
                     clean_data[tsv_col] = clean_data[tsv_col].apply(safe_int_convert)
-                    # Ensure it's treated as object type to avoid pandas automatic float conversion
-                    clean_data[tsv_col] = clean_data[tsv_col].astype('object')
                     
                 elif db_col == 'property_state':
                     # State: Must be 2 characters or NULL
@@ -154,11 +154,11 @@ def load_file_bulletproof_v2():
         'PA_Latitude': 'latitude',
         'PA_Longitude': 'longitude',
         'FIPS_Code': 'fips_code',
-        'Assessors_Parcel_Number': 'assessors_parcel_number',
+        'Assessors_Parcel_Number': 'apn',
         'Building_Area_1': 'building_area_total',
         'LotSize_Square_Feet': 'lot_size_square_feet',
         'Number_of_Bedrooms': 'number_of_bedrooms',
-        'Number_of_Baths': 'number_of_baths',
+        'Number_of_Baths': 'number_of_bathrooms',
         'Year_Built': 'year_built',
         'Total_Assessed_Value': 'total_assessed_value',
         'Assessment_Year': 'assessment_year',
@@ -180,10 +180,13 @@ def load_file_bulletproof_v2():
     conn = psycopg2.connect(**get_db_config())
     cursor = conn.cursor()
     
-    # Don't clear data for now - we want to test the fix first
-    print("🔍 Testing column alignment fix with current data...")
-    # cursor.execute("TRUNCATE TABLE datnest.properties")
-    # conn.commit()
+    # Set search path to datnest schema (like other working loaders)
+    cursor.execute("SET search_path TO datnest, public")
+    
+    # Clear existing data for fresh complete load
+    print("🗑️  Clearing existing data for complete load...")
+    cursor.execute("TRUNCATE TABLE properties")
+    conn.commit()
     
     # Process chunks
     chunk_size = 25000  # Smaller chunks for better error isolation
@@ -209,16 +212,18 @@ def load_file_bulletproof_v2():
             processed_chunk, _ = process_chunk_bulletproof_v2(chunk, field_mapping, chunk_num)
             
             if processed_chunk is not None and len(processed_chunk) > 0:
-                # Use COPY for fast loading
+                                # Use COPY for fast loading
                 with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.csv') as tmp_file:
-                    processed_chunk.to_csv(tmp_file.name, index=False, header=False)
+                    # CRITICAL: Use na_rep='\\N' for proper NULL handling in PostgreSQL COPY
+                    processed_chunk.to_csv(tmp_file.name, index=False, header=False, na_rep='\\N')
                     
                     with open(tmp_file.name, 'r') as f:
-                                            cursor.copy_from(
+                        cursor.copy_from(
                         f, 
-                        'properties',  # Table exists without schema prefix
+                        'properties',  # Just table name (schema in search_path)
                         columns=list(processed_chunk.columns),
-                        sep=','
+                        sep=',',
+                        null='\\N'  # Tell PostgreSQL how to interpret NULLs
                     )
                     
                     os.unlink(tmp_file.name)
@@ -230,10 +235,8 @@ def load_file_bulletproof_v2():
                 print(f"❌ Chunk {chunk_num}: Failed to process")
                 break
             
-            # Stop if we've exceeded expected file size
-            if total_processed >= 5100000:  # Safety limit
-                print("⚠️  Reached safety limit - stopping")
-                break
+            # Continue until we process the entire file
+            # No artificial limits - let's get ALL the data!
     
     except Exception as e:
         print(f"❌ Error during processing: {str(e)}")
