@@ -62,17 +62,25 @@
 
 ## 🔄 SMART SCALING COMMANDS
 
-### **Scale Down for Current Work (Save $1,200-1,500/month)**
+### **✅ CURRENT STATUS (August 1, 2025): PRODUCTION READY**
+**Active Configuration**: `db.r5.4xlarge` + Multi-AZ (optimal for 5M record load)
+**Performance**: 1,350 records/sec capability
+**Cost**: ~$1,800/month (justified for production data loading)
+
+### **Scale Down After Production Load (Save $1,200-1,500/month)**
 ```bash
-# For QA, validation, and smaller processing tasks
+# After completing 5M record load - scale down for cost savings
 aws rds modify-db-instance \
   --db-instance-identifier datnest-core-postgres \
-  --db-instance-class db.r5.xlarge \
+  --db-instance-class db.r5.large \
   --no-multi-az \
   --apply-immediately
+
+# Expected: $300-400/month (75% cost reduction)
+# Use for: QA, validation, development work
 ```
 
-### **Scale Up for Major File Processing**
+### **Scale Up for Major File Processing (File 2, National Deployment)**
 ```bash
 # When ready for File 2 or national deployment
 aws rds modify-db-instance \
@@ -80,7 +88,40 @@ aws rds modify-db-instance \
   --db-instance-class db.r5.4xlarge \
   --multi-az \
   --apply-immediately
+
+# Expected: $1,800/month (maximum performance)
+# Use for: Large file processing, production loads
 ```
+
+### **Development/QA Scaling (Maximum Cost Savings)**
+```bash
+# For development and testing work
+aws rds modify-db-instance \
+  --db-instance-identifier datnest-core-postgres \
+  --db-instance-class db.r5.xlarge \
+  --no-multi-az \
+  --apply-immediately
+
+# Expected: $600-800/month (moderate performance)
+# Use for: Medium workloads, File 2 development
+```
+
+### **🎯 SCALING STRATEGY RECOMMENDATIONS**
+
+#### **Current Production Load Phase (August 2025)**
+- **Use**: `db.r5.4xlarge` + Multi-AZ  
+- **Duration**: Until 5M record load complete (~30 minutes)
+- **Justification**: Maximum performance for business-critical data load
+
+#### **Post-Load Development Phase**  
+- **Use**: `db.r5.large` (Single-AZ)
+- **Duration**: Between major file processing sessions
+- **Savings**: $1,400-1,500/month vs production configuration
+
+#### **File 2 Processing Phase**
+- **Use**: `db.r5.4xlarge` + Multi-AZ (scale up temporarily)
+- **Duration**: Only during active file processing
+- **Strategy**: Scale up → process → scale down for cost efficiency
 
 ### **Monitor and Adjust**
 ```bash
